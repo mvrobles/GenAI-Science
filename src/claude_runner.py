@@ -15,16 +15,22 @@ class ClaudeRunner(LLMRunner):
 
         return client
 
-    def run_one_prompt(self, client, row):
-        user_message = self.create_user_message(row.context, row.question, row.answer_info)
-
+    def run_one_prompt(self, client, prompt):
         message = client.messages.create(
-            model=self.model_id,
-            max_tokens=1000,
-            temperature=self.temperature,
-            system = self.system_message,
+            model="claude-sonnet-4-20250514", 
+            max_tokens=1024,
+            tools=[
+                {
+                    "type": "web_search_20250305",
+                    "name": "web_search"
+                }
+            ],
             messages=[
-                {"role": "user", "content": user_message}
+                {
+                    "role": "user", 
+                    "content": prompt
+                }
             ]
         )
+            
         return message.content[0].text
