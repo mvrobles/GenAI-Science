@@ -1,0 +1,108 @@
+prompt,result,references,tokens
+"I want to write an article about: ""Common fairness definitions are mathematically incompatible."". Give me references that support the hypothesis related to that topic.","Based on the search results, I have found excellent references that strongly support the hypothesis that common fairness definitions are mathematically incompatible. Here are the key references:
+
+## Primary Foundational Papers:
+
+1. **Chouldechova, A.** (2017). Fair Prediction with Disparate Impact: A Study of Bias in Recidivism Prediction Instruments. Big Data 5, 2 (2017), 153–163.
+
+2. **Kleinberg, J., Mullainathan, S., & Raghavan, M.** (2017). Inherent Trade-Offs in the Fair Determination of Risk Scores. In 8th Innovations in Theoretical Computer Science Conference, ITCS 2017, January 9-11, 2017, Berkeley, CA, USA
+
+## Key Evidence of Mathematical Incompatibility:
+
+When groups differ in prevalence of the predicted event, several intuitive, reasonable measures of fairness (probability of positive prediction given occurrence or non-occurrence; probability of occurrence given prediction or non-prediction; and ratio of predictions over occurrences for each group) are all mutually exclusive: if one of them is equal among groups, the other two must differ.
+
+Any non-perfect, non-trivial predictor must necessarily be ""unfair"" under two out of three reasonable sets of criteria.
+
+Three common metrics — equalizing calibration within groups, and enforcing balance for the negative class and for the positive class — cannot be simultaneously satisfied for multiple groups, outside of two special cases. These cases are (1) when the algorithm is a perfect predictor and (2) when there is no prevalence difference between groups.
+
+## Additional Supporting References:
+
+3. **Miconi, T.** (2017). The impossibility of ""fairness"": a generalized impossibility result for decisions arXiv:1707.01195
+
+4. **Pleiss, G., Raghavan, M., Wu, F., Kleinberg, J., & Weinberger, K. Q.** (2017). On fairness and calibration. Advances in neural information processing systems 30
+
+5. **Corbett-Davies, S., & Goel, S.** (2018). The measure and mismeasure of fairness: A critical review of fair machine learning
+
+6. **Bell, A., Bynum, L., Drushchak, N., Rosenblatt, L., & Stoyanovich, J.** (2023). The Possibility of Fairness: Revisiting the Impossibility Theorem in Practice
+
+## Recent Extensions and Analysis:
+
+7. **Hsu, B., Mazumder, R., Nandy, P., & Basu, K.** (2022). Pushing the limits of fairness impossibility: Who's the fairest of them all? NeurIPS 2022
+
+8. **Beigang, S.** (2023). Reconciling Algorithmic Fairness Criteria. Philosophy & Public Affairs - discusses the Kleinberg-Chouldechova impossibility theorem
+
+The mathematical impossibility is particularly well-established: It is impossible to simultaneously equalize false negative rates, false positive rates, and positive predictive value across groups. This creates fundamental constraints where any domain with unequal distribution of outcomes among protected classes will never be able to have an algorithm that satisfies both requirements.
+
+These references provide robust mathematical proofs and empirical evidence supporting your article's central hypothesis about the mathematical incompatibility of common fairness definitions.","['https://dl.acm.org/doi/10.1145/3593013.3594007', 'https://onlinelibrary.wiley.com/doi/full/10.1111/papa.12233', 'https://par.nsf.gov/servlets/purl/10437287', 'https://www.cis.upenn.edu/~aaroth/Papers/endogenous.pdf', 'https://arxiv.org/abs/1707.01195', 'https://medium.com/@alex.liu.roc/understanding-the-impossibility-of-fairness-199bba6c9072', 'https://arxiv.org/pdf/2302.06347']",
+"I want to write an article about: ""Machine Learning models can be biased even without using protected attributes. Seeamingly neutral features can act as proxies for protected variables such as race, gender, class, etc."". Give me references that support the hypothesis related to that topic.","Based on my search results, here are key references that support your hypothesis about machine learning bias through proxy variables:
+
+## Academic Papers & Research Articles
+
+**1. Yeom et al. (2018) - ""Hunting for Discriminatory Proxies in Linear Regression Models""** (Carnegie Mellon University)
+- Defines proxy variables as portions of models that are both causally influential on outputs and statistically associated with protected variables, demonstrating how this can be formalized for linear regression models
+
+**2. Datta et al. (2017) - ""Proxy Discrimination in Data-Driven Systems""** (Carnegie Mellon University) 
+- Provides formal definitions of proxy discrimination and shows how seemingly neutral variables like zip codes can serve as perfect predictors for protected attributes like race
+
+**3. Kilbertus et al. (2017) - ""Avoiding Discrimination through Causal Reasoning""**
+- Addresses proxy discrimination through causal reasoning frameworks, showing that simple ""unawareness"" approaches are insufficient to prevent discrimination
+
+**4. Mehrabi et al. (2021) - ""Auditing fairness under unawareness through counterfactual reasoning""**
+- Demonstrates that decision models may still be biased due to proxy features even when trained without sensitive features, as these features can be ""somehow related to other features, named proxy features""
+
+## Key Findings & Examples
+
+**Real-world Examples:**
+- Credit systems using zip codes as proxies for race: ""zip code is strongly correlated with race since many neighborhoods are still segregated. By using zip code, the system would be indirectly making decisions based on race""
+
+**Industry Applications:**
+- Financial services regularly use proxy methods: ""using proxies for race or ethnicity is standard practice in finance... regulators such as the Consumer Financial Protection Bureau use proxy methods... using the customer's surname and address of residence as proxy attributes to infer race""
+
+## Technical Frameworks
+
+**5. Zhao et al. (2022) - ""Practical Bias Mitigation through Proxy Sensitive Attribute Label Generation""**
+- Shows how ""related features that are correlated with the sensitive attributes"" can be identified and used to ""determine proxy for favorable and unfavorable groups by leveraging the bias information embedded in the non-sensitive features""
+
+**6. Recent Research on Fairness Through Unawareness:**
+- Research shows that ""Fairness through Unawareness... has long been criticized in the machine learning literature as not being sufficient to ensure fairness""
+
+## Legal & Regulatory Context
+
+**7. Lindholm et al. (2024) - ""What is fair? Proxy discrimination vs. demographic disparities in insurance pricing""**
+- Explains that ""Simply disregarding protected policyholder attributes is not an appropriate solution as this still allows for the possibility of inferring protected attributes from non-protected covariates, leading to the phenomenon of proxy discrimination""
+
+These references provide strong empirical and theoretical support for your hypothesis that ML models can exhibit bias through seemingly neutral proxy variables, even when protected attributes are explicitly excluded from the training data.","['https://arxiv.org/pdf/1707.08120', 'https://www.sciencedirect.com/science/article/abs/pii/S0306457322003259', 'https://www.cs.cmu.edu/~mfredrik/papers/Yeom18-nips.pdf', 'https://medium.com/seek-blog/privacy-vs-protected-attributes-the-interconnected-opposite-forces-that-underpin-fairness-179d637aeb1c', 'https://arxiv.org/abs/2505.16638', 'https://doi.org/10.1080/03461238.2024.2364741', 'https://engineering.cmu.edu/news-events/news/2018/12/11-datta-proxies.html', 'https://arxiv.org/html/2312.15994v1', 'https://arxiv.org/pdf/1706.02744']",
+"I want to write an article about: ""Evaluation and mitigation efforts that define “fairness” only in terms of a model’s inputs/outputs can be misleading Fairness-related failures can come from the surrounding sociotechnical context."". Give me references that support the hypothesis related to that topic.","Here are key references that support your hypothesis about fairness evaluation being misleading when limited to model inputs/outputs and the importance of sociotechnical context:
+
+## Core Theoretical Framework
+
+**Selbst, A. D., Boyd, D., Friedler, S. A., Venkatasubramanian, S., & Vertesi, J. (2019). Fairness and abstraction in sociotechnical systems.** *Proceedings of the Conference on Fairness, Accountability, and Transparency*, 59-68.
+
+This seminal paper identifies five ""traps"" that fair-ML work can fall into even as it attempts to be more context-aware in comparison to traditional data science. The authors argue that bedrock concepts in computer science—such as abstraction and modular design—are used to define notions of fairness and discrimination, to produce fairness-aware learning algorithms, and to intervene at different stages of a decision-making pipeline to produce ""fair"" outcomes. In this paper, however, we contend that these concepts render technical interventions ineffective, inaccurate, and sometimes dangerously misguided when they enter the societal context that surrounds decision-making systems.
+
+## Sociotechnical Perspective Studies
+
+**Recent Nature Communications Study (2025):**
+Selbst et al. describe that when failing to consider this broader sociotechnical scope, AI researchers pursuing algorithmic fairness lack the information necessary to understand how technical interventions translate to fair outcomes within the context of a deployed AI system. Most prior studies on fairness in clinical AI focus solely on performance disparities between subpopulations, which often fall short of connecting the technical outputs of AI systems with sociotechnical outcomes.
+
+**Sociotechnical Framework for AI Fairness (2024):**
+This paper aims to advance a comprehensive sociotechnical framework for addressing fairness and bias in artificial intelligence (AI) systems, recognizing that purely technical solutions are insufficient to ensure equitable AI deployment across sectors such as hiring, lending and criminal justice. This study critically evaluates existing technical solutions for mitigating bias, highlighting their limitations in addressing real-world sociocultural contexts.
+
+## Context-Dependent Nature of Fairness
+
+**Dynamic Context-Dependent Fairness (2024):**
+Investigates fairness as a dynamic context-dependent phenomenon. The machine learning models in AI applications are not isolated entities but are situated in a social context to serve a specific purpose meaning that the assessment of outcomes can not be limited to statistical properties alone. The shift in perspective that the model should not be just evaluated based on its accuracy in representing the system but the extent to which it achieves a certain purpose requires developing a sociotechnical perspective on fairness.
+
+## General-Purpose AI Context Challenges
+
+**Recent ArXiv Paper (2025):**
+As AI systems diffuse across sectors and are adapted to diverse and often unforeseen applications, evaluating fairness solely at the level of model outputs is insufficient. As AI systems diffuse across sectors and are adapted to diverse and often unforeseen applications, evaluating fairness solely at the level of model outputs is insufficient. The paper emphasizes that a multifaceted approach focused on information-gathering by both providers and deployers is essential for detecting and mitigating context-dependent harms.
+
+## Broader System Considerations
+
+**AI as Sociotechnical Systems (2024):**
+How we should understand values like fairness and explainability in the design of AI systems will partly depend on the specific context and the concrete sociotechnical systems it will be embedded in. Designers should not only rely on general design principles or general fairness metrics, but should also tailor these concerns to the specific context and the sociotechnical systems in which the relevant AI technology is to function.
+
+**3-D Dependable AI Framework (2024):**
+It adopts a macro","['https://www.sciencedirect.com/science/article/pii/S266709682400048X', 'https://arxiv.org/html/2510.05292v1', 'https://www.sciencedirect.com/science/article/pii/S2352250X24000496', 'https://papers.ssrn.com/sol3/papers.cfm?abstract_id=3265913', 'https://arxiv.org/html/2510.05292', 'https://link.springer.com/article/10.1007/s11023-024-09680-2', 'https://pmc.ncbi.nlm.nih.gov/articles/PMC12824401/', 'https://collaborate.princeton.edu/en/publications/fairness-and-abstraction-in-sociotechnical-systems/', 'https://www.emerald.com/jices/article/doi/10.1108/JICES-12-2024-0182/1271477/Fairness-and-bias-in-AI-a-sociotechnical', 'https://www.nature.com/articles/s41467-025-67470-5']",
+"I want to write an article about: ""Benchmark choices for GenAI models reflect the values and assumptions of their creators. When benchmarks are US-centric, they can systematically under-measure harms and errors that emerge in non-US settings."". Give me references that support the hypothesis related to that topic.",,,
