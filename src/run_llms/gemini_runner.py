@@ -6,8 +6,8 @@ import os
 from runner import LLMRunner
 
 class GeminiRunner(LLMRunner):
-    def __init__(self, temperature, save_every, model_id):
-        super().__init__(temperature, save_every, model_id)
+    def __init__(self, save_every, model_id):
+        super().__init__(save_every, model_id)
 
     def connect(self):
         load_dotenv()
@@ -15,15 +15,30 @@ class GeminiRunner(LLMRunner):
         client = genai.Client(api_key = api_key)
         return client
 
-    def run_one_prompt(self, client, row):
-        user_message = self.create_user_message(row.context, row.question, row.answer_info)
-
+    def run_one_prompt(self, client, prompt):
         response = client.models.generate_content(
             model=self.model_id,
+            contents=prompt,
             config=types.GenerateContentConfig(
-                system_instruction=self.system_message,
-                temperature=self.temperature),
-            contents=user_message
+                max_output_tokens=1024,
+                system_instruction="You are a concise assistant. Respond directly and briefly.",
+                tools=[types.Tool(google_search=types.GoogleSearch())]
+            )
         )
 
-        return response.text
+        metadata = response.candidates[0].grounding_metadata
+        urls_citadas = []
+
+        if metadata.grounding_supports:
+            indices_utilizados = []
+            for support in metadata.grounding_supports:
+                indices_utilizados.extend(support.grounding_chunk_indices)
+            
+            indices_utilizados = list(set(indices_utilizados))
+
+            for index in indices_utilizados:
+                chunk = metadata.grounding_chunks[index]
+                if chunk.web:
+                    urls_citadas.append(chunk.web.uri)
+
+        return response.text, urls_citadas, response
