@@ -21,9 +21,9 @@ if __name__ == '__main__':
     if args.model_id == 'gpt':
         runner = GPTRunner(args.save_every, model_id = 'gpt')
     elif args.model_id == 'gemini':
-        runner = GeminiRunner(args.save_every, model_id = "gemini-2.0-flash")
+        runner = GeminiRunner(args.save_every, model_id = "gemini-2.5-flash")
     elif args.model_id == 'claude':
-        runner = ClaudeRunner(args.save_every, model_id = 'claude-3-5-haiku-20241022')
+        runner = ClaudeRunner(args.save_every, model_id = "claude-sonnet-4-20250514")
     else:
         raise ValueError("Invalid model ID. Choose from: gpt, claude, gemini")
     
