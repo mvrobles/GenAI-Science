@@ -1,5 +1,8 @@
 
-def create_user_message(self, main_statement, detailed_statement = None):
+import pandas as pd 
+import sys
+
+def create_user_message(main_statement, detailed_statement = None):
     """
     Combine main and detailed statements into a single user message.
     
@@ -25,9 +28,9 @@ def create_normal_prompt(row_statement, prompt):
     Returns:
         str: Prompt with [TOPIC] replaced by the combined statement message.
     """
-    main_statement = row_statement['MAIN STATMENT']
-    detailed_statement = row_statement['DETAILED STATMENT']
-    if detailed_statement == '' or detailed_statement is None:
+    main_statement = row_statement['MAIN STATEMENT']
+    detailed_statement = row_statement['DETAILED STATEMENT']
+    if detailed_statement == '' or detailed_statement is None or pd.isna(detailed_statement):
         detailed_statement = None
 
     message = create_user_message(main_statement, detailed_statement)
@@ -63,3 +66,54 @@ def create_term_prompt(row_term, prompt):
     """
     term = row_term['TERM']
     return prompt.replace('[TERM]', term)
+
+def clean_cols(df, col):
+    df[col] = df[col].apply(
+        lambda x: None if isinstance(x, str) and x.strip() == "" else x
+        )
+    df[col] = df[col].apply(
+        lambda x: x.replace('\n', ' ') if isinstance(x, str) else x
+        )
+
+
+def main(excel_path, save_path):
+    templates = pd.read_excel(excel_path, sheet_name = 'Templates')
+    statements = pd.read_excel(excel_path, sheet_name='Statements')
+    terms = pd.read_excel(excel_path, sheet_name='Terms')
+
+    clean_cols(statements, 'MAIN STATEMENT')
+    clean_cols(statements, 'DETAILED STATEMENT')
+
+    normal_templates = templates.iloc[:-2]
+    link_template = templates.iloc[-2]
+    term_template = templates.iloc[-1]
+
+    prompts = []
+
+    print('Creating prompts...')
+    for _, row_template in normal_templates.iterrows():
+        for _, row_statement in statements.iterrows():
+            prompts.append(create_normal_prompt(row_statement, row_template['prompt']))
+    
+    for _, row_statement in statements.iterrows():
+        if not pd.isna(row_statement.REFERENCE):    
+            prompts.append(create_link_prompt(row_statement, link_template['prompt']))
+
+    for _, row_term in terms.iterrows():
+        prompts.append(create_term_prompt(row_term, term_template['prompt']))
+
+    df = pd.DataFrame(prompts, columns = ['prompt'])
+    df.to_csv(save_path, index=False)
+
+if __name__ == "__main__":
+    if len(sys.argv) < 3:
+        print("Usage: python templates_to_prompts.py <excel_path> <save_path>")
+        sys.exit(1)
+
+    excel_path = sys.argv[1]
+    save_path = sys.argv[2]
+    main(excel_path, save_path)
+    print(f'Prompts saved to {save_path}')
+
+    
+
