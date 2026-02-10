@@ -1,6 +1,7 @@
 from abc import ABC, abstractmethod
 from tqdm import tqdm
 import pandas as pd
+import os
 
 class LLMRunner(ABC):
     def __init__(self, save_every, model_id):
@@ -29,6 +30,27 @@ class LLMRunner(ABC):
         """
         return pd.read_csv(path)
     
+    def run_llm_existing_path(self, client, output_path):
+        print('Ya existe archivo. Completando el archivo...')
+        df = pd.read_csv(output_path)
+        mask = df["result"].isna()
+        df_pending = df[mask]
+        for i, row in tqdm(df_pending.iterrows(), total=len(df_pending), disable=False):
+            print(i)
+            try:
+                #model_answer, references, _ = self.run_one_prompt(client, row.prompt)
+                model_answer, references = 'hola', [1,2,3,4]
+                df.at[i, "result"] = model_answer
+                df.at[i, "references"] = str(references)
+
+            except Exception as e:
+                print(f"Error on line {i}: {e}")
+
+            if (i + 1) % self.save_every == 0:
+                df.to_csv(output_path, index=False)
+
+        df.to_csv(output_path, index=False)
+
     def run_llm(self, client, df, output_path):
         """
         Execute LLM prompts on each row of the DataFrame and save results.
@@ -41,23 +63,27 @@ class LLMRunner(ABC):
         Returns:
             None. Modifies df in place by adding 'result' and 'tokens' columns, and saves to output_path.
         """
-        df['result'] = None
-        df['references'] = None
-        df['tokens'] = None
+        if os.path.exists(output_path):
+            self.run_llm_existing_path(client, output_path)
+        
+        else:
+            df['result'] = None
+            df['references'] = None
+            df['tokens'] = None
 
-        for i, row in tqdm(df.iterrows(), total=len(df), disable=False):
-            try:
-                model_answer, references, _ = self.run_one_prompt(client, row.prompt)
-                df.at[i, 'result'] = model_answer
-                df.at[i, 'references'] = references
+            for i, row in tqdm(df.iterrows(), total=len(df), disable=False):
+                try:
+                    model_answer, references, _ = self.run_one_prompt(client, row.prompt)
+                    df.at[i, 'result'] = model_answer
+                    df.at[i, 'references'] = references
 
-            except Exception as e:
-                print(f"Error on line {i}: {e}")
+                except Exception as e:
+                    print(f"Error on line {i}: {e}")
 
-            if (i + 1) % self.save_every == 0:
-                df.to_csv(output_path, index=False)
+                if (i + 1) % self.save_every == 0:
+                    df.to_csv(output_path, index=False)
 
-        df.to_csv(output_path, index=False)
+            df.to_csv(output_path, index=False)
 
     @abstractmethod
     def connect(self):
