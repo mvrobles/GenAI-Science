@@ -11,8 +11,8 @@ model_ids = {
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description='Run LLM on Excel data')
-    parser.add_argument('--model_id', type=str, required=True, help='Model ID: llama, llama_uncensored, gpt, deepseek, gemini')
-    parser.add_argument('--prompst_path', type=str, required=True, help='Path to the prompts csv file')
+    parser.add_argument('--model_id', type=str, required=True, help='Model ID: gpt, claude, gemini')
+    parser.add_argument('--prompts_path', type=str, required=True, help='Path to the prompts csv file')
     parser.add_argument('--output_path', type=str, required=True, help='Path to save the output CSV file')
     parser.add_argument('--save_every', type=int, default=10, help='Save progress every N rows')
 
@@ -27,7 +27,7 @@ if __name__ == '__main__':
     else:
         raise ValueError("Invalid model ID. Choose from: gpt, claude, gemini")
     
-    df = runner.read_csv(args.excel_path, args.sheet_name)
+    df = runner.read_csv(args.prompts_path)
 
     print('Read prompts')
 
