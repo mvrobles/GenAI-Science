@@ -1,7 +1,8 @@
+#import time
 from dotenv import load_dotenv
 import anthropic
 import os
-import re
+#import re
 
 from runner import LLMRunner
 
@@ -17,12 +18,14 @@ class ClaudeRunner(LLMRunner):
         return client
 
     def run_one_prompt(self, client, prompt):
+        #time.sleep(1)
         response = client.messages.create(
             model=self.model_id,
             max_tokens=1024,
             tools=[{
                 "type": "web_search_20250305",
-                "name": "web_search"
+                "name": "web_search",
+                "max_uses": 3
             }],
             system="You are a concise assistant. Respond directly and briefly.",
             messages=[{"role": "user", "content": prompt}]
