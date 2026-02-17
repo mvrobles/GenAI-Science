@@ -1,7 +1,7 @@
 import argparse
 from openai_runner import GPTRunner
 #from gemini_runner import GeminiRunner
-#from claude_runner import ClaudeRunner
+from claude_runner import ClaudeRunner
 
 model_ids = {
     'llama': "meta-llama/Llama-3.1-8B-Instruct",
@@ -23,7 +23,7 @@ if __name__ == '__main__':
     elif args.model_id == 'gemini':
         runner = GeminiRunner(args.save_every, model_id = "gemini-2.5-flash")
     elif args.model_id == 'claude':
-        runner = ClaudeRunner(args.save_every, model_id = "claude-sonnet-4-20250514")
+        runner = ClaudeRunner(args.save_every, model_id = "claude-haiku-4-5-20251001")  
     else:
         raise ValueError("Invalid model ID. Choose from: gpt, claude, gemini")
     
