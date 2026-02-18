@@ -1,7 +1,7 @@
 import argparse
 from openai_runner import GPTRunner
-#from gemini_runner import GeminiRunner
-#from claude_runner import ClaudeRunner
+from gemini_runner import GeminiRunner
+from claude_runner import ClaudeRunner
 
 model_ids = {
     'llama': "meta-llama/Llama-3.1-8B-Instruct",
