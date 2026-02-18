@@ -36,10 +36,8 @@ class LLMRunner(ABC):
         mask = df["result"].isna()
         df_pending = df[mask]
         for i, row in tqdm(df_pending.iterrows(), total=len(df_pending), disable=False):
-            print(i)
             try:
-                #model_answer, references, _ = self.run_one_prompt(client, row.prompt)
-                model_answer, references = 'hola', [1,2,3,4]
+                model_answer, references, _ = self.run_one_prompt(client, row.prompt)
                 df.at[i, "result"] = model_answer
                 df.at[i, "references"] = str(references)
 
