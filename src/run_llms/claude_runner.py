@@ -26,7 +26,7 @@ class ClaudeRunner(LLMRunner):
                 "type": "web_search_20250305",
                 "name": "web_search",
                 "max_uses": 3,
-                "search_context_size": "low"
+                #"search_context_size": "low"
             }],
             system="You are a concise assistant. Respond directly and briefly.",
             messages=[{"role": "user", "content": prompt}]

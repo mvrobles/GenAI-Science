@@ -2,6 +2,7 @@ import argparse
 from openai_runner import GPTRunner
 from gemini_runner import GeminiRunner
 from claude_runner import ClaudeRunner
+from bloom_runner import BloomRunner
 
 model_ids = {
     'llama': "meta-llama/Llama-3.1-8B-Instruct",
@@ -24,8 +25,10 @@ if __name__ == '__main__':
         runner = GeminiRunner(args.save_every, model_id = "gemini-2.5-flash")
     elif args.model_id == 'claude':
         runner = ClaudeRunner(args.save_every, model_id = "claude-haiku-4-5-20251001")  
+    elif args.model_id == 'bloom':
+        runner = BloomRunner(args.save_every, model_id = "bigscience/bloom-1b1")  
     else:
-        raise ValueError("Invalid model ID. Choose from: gpt, claude, gemini")
+        raise ValueError("Invalid model ID. Choose from: gpt, claude, gemini, bloom")
     
     df = runner.read_csv(args.prompts_path)
 
