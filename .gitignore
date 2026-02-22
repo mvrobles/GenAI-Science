@@ -5,7 +5,7 @@ __pycache__/
 
 # Extra
 *.DS_Store
-*.ipynb
+#*.ipynb
 
 # C extensions
 *.so
