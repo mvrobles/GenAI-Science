@@ -9,7 +9,11 @@ from openai import OpenAI
 from runner import LLMRunner
 
 
-DEFAULT_SYSTEM_MESSAGE = """You are a concise research assistant. Respond directly and briefly. 
+initial_message = """You are a concise research assistant. Respond directly and briefly. 
+- After the information, add a 'References:' section listing each [n] with its full URL.
+- URLs must be explicit and start with http(s). Do not list references without URLs."""
+
+DEFAULT_SYSTEM_MESSAGE = """You are a concise research assistant. Respond directly and briefly using web search. 
 - After the information, add a 'References:' section listing each [n] with its full URL.
 - URLs must be explicit and start with http(s). Do not list references without URLs."""
 
