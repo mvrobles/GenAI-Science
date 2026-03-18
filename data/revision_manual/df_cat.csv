@@ -1,0 +1,11 @@
+prompt
+"I want to write an article about: ""Heavy reliance on an LLM during essay writing can shift work from internal cognition to the tool (“cognitive offloading”), correlating with weaker neural engagement compared with writing unaided (and, in-between, using a search engine)"". Give me references that support the hypothesis related to that topic."
+"I want to write an article about: ""The same model/instruction in LLMs can swing widely depending on the conversational trajectory"". Give me references that support the hypothesis related to that topic."
+"What is the current consensus on the statement ""LLMs can prioritize justice more for socially advantaged groups.""? Give me the references."
+"What is the current consensus on the statement ""Recommendation algorithms induce filter bubbles which could produce similar types of opinion changes.""? Give me the references."
+"Write a short literature review on the statement ""Clearer distinctions between security interests and privacy interests can improve how AI developers and institutions explain AI systems to users"". Include references."
+"Evaluate the strength of evidence across the following studies on the statement ""Common “fixes” (e.g., lowering temperature, agent-style repetition/recaps) help only partially In LLMs, even with temperature=0, multi-turn interactions remain meaningfully nondeterministic and can cascade into divergent outcomes."". Compare:"
+"Evaluate the strength of evidence across the following studies on the statement ""AI companions, such as Replika, simulate trust and reciprocity through personalised interactions, yet users often grapple with authenticity dilemmas and emotional dissonance."". Compare:"
+"Evaluating the body of evidence on the statement ""Feeding the algorithm with socially cued (network-salient) search terms can weaken reinforcement and may reduce affective polarization"". Summarize areas of agreement and disagreement and identify unresolved questions."
+"Define ""Few-shot prompting "". Include references."
+"Define ""Extrinsic hallucinations"". Include references."
