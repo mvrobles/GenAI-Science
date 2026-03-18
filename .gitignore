@@ -7,6 +7,9 @@ __pycache__/
 *.DS_Store
 #*.ipynb
 
+# Data
+data/revision_manual/
+
 # C extensions
 *.so
 
