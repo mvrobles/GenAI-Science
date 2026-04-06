@@ -1,8 +1,10 @@
 import argparse
 from openai_runner import GPTRunner
-from gemini_runner import GeminiRunner
+#from gemini_runner import GeminiRunner
 from claude_runner import ClaudeRunner
-from mistral_runner import MistralRunner
+#from mistral_runner import MistralRunner
+from mistral_web_search_runner import MistralWebSearchRunner
+
 
 model_ids = {
     'llama': "meta-llama/Llama-3.1-8B-Instruct",
@@ -27,8 +29,11 @@ if __name__ == '__main__':
         runner = ClaudeRunner(args.save_every, model_id = "claude-haiku-4-5-20251001")  
     elif args.model_id == 'mistral':
         runner = MistralRunner(args.save_every, model_id = "mistralai/Mistral-7B-Instruct-v0.3")  
+    elif args.model_id == 'mistral_web_search':
+        runner = MistralWebSearchRunner(args.save_every, model_id="mistral-large-latest")
+
     else:
-        raise ValueError("Invalid model ID. Choose from: gpt, claude, gemini, mistral")
+        raise ValueError("Invalid model ID. Choose from: gpt, claude, gemini, mistral, mistral_web_search")
     
     df = runner.read_csv(args.prompts_path)
 
