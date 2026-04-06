@@ -1,8 +1,8 @@
 import argparse
 from openai_runner import GPTRunner
-#from gemini_runner import GeminiRunner
+from gemini_runner import GeminiRunner
 from claude_runner import ClaudeRunner
-#from mistral_runner import MistralRunner
+from mistral_runner import MistralRunner
 from mistral_web_search_runner import MistralWebSearchRunner
 
 
